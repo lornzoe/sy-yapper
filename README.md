@@ -140,6 +140,26 @@ The profile and engine are checked against each other: pairing a cloned voice
 with a preset-only engine is a guaranteed failure, so it blocks Start and says
 why. Picking a profile auto-selects the engine it was built for.
 
+### Building a standalone .exe
+
+To send this to someone who has no Python installed:
+
+```powershell
+.\build-exe.ps1
+```
+
+That produces `dist\sy-yapper.exe` (~26 MB) with Python, Tkinter and every
+dependency inside, including the native PortAudio and libsndfile libraries.
+Send them that single file. They still need the **Voicebox app** and
+**VB-Audio Cable** installed -- the exe only replaces the Python setup.
+
+Settings are stored in a `.env` created next to the exe the first time they
+press **Save to .env**, so the exe can live in its own folder and keep its
+configuration there.
+
+The build is windowed (no console). If you need to see tracebacks while
+debugging a build, drop `--windowed` from `build-exe.ps1` and rebuild.
+
 ### Running headless
 
 The terminal-only path is unchanged:

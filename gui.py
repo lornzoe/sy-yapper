@@ -513,7 +513,22 @@ class App:
         os._exit(0)
 
 
+def _guard_missing_streams() -> None:
+    """A windowed PyInstaller build has no console: sys.stdout/stderr are None.
+
+    Anything that writes to them -- a stray print, logging's lastResort handler,
+    a chatty dependency -- raises AttributeError on None. Point them at a sink
+    so the app cannot die from an incidental write.
+    """
+    devnull = open(os.devnull, "w", encoding="utf-8")
+    if sys.stdout is None:
+        sys.stdout = devnull
+    if sys.stderr is None:
+        sys.stderr = devnull
+
+
 def run_gui(autostart: bool = False) -> None:
+    _guard_missing_streams()
     root = tk.Tk()
     try:
         ttk.Style().theme_use("vista")
