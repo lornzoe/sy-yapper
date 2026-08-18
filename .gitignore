@@ -1,0 +1,29 @@
+# Local config -- holds your channel and any OAuth token. Never commit it.
+# .env.example is the template that ships instead.
+.env
+.env.bak
+*.bak
+
+# Virtualenv
+.venv/
+venv/
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+
+# Packaged builds
+*.zip
+build/
+dist/
+*.spec
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# OS cruft
+Thumbs.db
+desktop.ini
+.DS_Store
